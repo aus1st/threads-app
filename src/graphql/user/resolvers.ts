@@ -8,6 +8,15 @@ const queries  = {
         })
 
         return token;
+    },
+
+    getLoggedinUser: async(_:any, param:any, context: any)=>{
+       
+        if(context) {
+           const user = await UserService.getUserById(context.id)
+            return user;
+        }
+
     }
 };
 const mutations = {
