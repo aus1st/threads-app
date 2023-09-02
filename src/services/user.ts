@@ -18,6 +18,12 @@ export interface LoginUserPayload {
 
 class UserService {
 
+public static VerifyJwt(token: string) {
+    const user = JWT.verify(token,JWT_SECRET);
+    return user;
+
+}
+
 private static hashedPassowrd(password: string, salt: string) {
     
        const hashedPwd = createHmac('sha256',salt).update(password).digest('hex');
@@ -26,6 +32,10 @@ private static hashedPassowrd(password: string, salt: string) {
 
     private static async getUserByEmail(email: string) {
         return await prismaClient.user.findUnique({where :{ email}})
+
+    }
+    public static async getUserById(id: string) {
+        return await prismaClient.user.findUnique({where :{ id}})
 
     }
 
